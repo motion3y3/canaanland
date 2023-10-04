@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "144292826716",
+    "project_id": "church-of-god-kl",
+    "storage_bucket": "church-of-god-kl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144292826716:android:107f3e6820494cfdee2099",
+        "android_client_info": {
+          "package_name": "com.example.cog_kl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJy-R_xeZO7g71HMXmTiSPctw_hdI1kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144292826716:android:82dc124c9e4827bdee2099",
+        "android_client_info": {
+          "package_name": "com.example.sweat_kick"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqJy-R_xeZO7g71HMXmTiSPctw_hdI1kU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
