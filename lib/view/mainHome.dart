@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sweat_kick/view/homePage.dart';
-import 'package:sweat_kick/view/page1.dart';
-import 'package:sweat_kick/view/page2.dart';
+import 'package:sweat_kick/view/physicalMeetings.dart';
+import 'package:sweat_kick/view/onlineMeetings.dart';
+import 'package:sweat_kick/view/admin.dart';
 import 'package:sweat_kick/view/settings.dart';
 
 void main() {
@@ -35,19 +37,79 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = [
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  bool isAdmin = false;
+  List<Widget> _pages = [
     const HomePage(),
     Page1(),
+    Page3(),
     UserListScreen(),
-    Page3()
   ];
+  List<BottomNavigationBarItem> footerItems = [
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.video_call_outlined),
+      label: 'Online Meeing',
+    ),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle_outlined), label: 'Settings'),
+    const BottomNavigationBarItem(icon: Icon(Icons.pageview), label: 'Admin'),
+  ];
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    //checkAdminStatus(); // Call the function to check admin status when the widget is initialized
+  }
 
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  Future<void> checkAdminStatus() async {
+    final String? email = FirebaseAuth.instance.currentUser?.email;
+    print(email);
+    if (email != null) {
+      DocumentSnapshot userSnapshot =
+          await _firestore.collection('users').doc(email).get();
+      print(userSnapshot.exists);
+      print(userSnapshot.data());
+      if (userSnapshot.exists) {
+        print("HI1");
+        final userData = userSnapshot.data();
+        print(userData);
+        // Check the 'isAdmin' field in the user's data
+        if (userData != null &&
+            userData is Map<String, dynamic> &&
+            userData['isAdmin'] == true) {
+          print("HI");
+          setState(() {
+            _pages = [
+              const HomePage(),
+              Page1(),
+              Page3(),
+              UserListScreen(),
+            ];
+
+            footerItems = [
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.home), label: 'Home'),
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.video_call_outlined),
+                label: 'Online Meeing',
+              ),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.account_circle_outlined), label: 'Settings'),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.pageview), label: 'Admin'),
+            ];
+          });
+        }
+      }
+    }
   }
 
   @override
@@ -65,22 +127,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 .inversePrimary, // Set the background color to transparent
           ),
           child: BottomNavigationBar(
-              currentIndex: _currentIndex,
-              onTap: _onTabTapped,
-              fixedColor: Colors.black,
-              showUnselectedLabels: true,
-              items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.video_call_outlined),
-                  label: 'Online Meeing',
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.pageview), label: 'Page 2'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.account_circle_outlined),
-                    label: 'Settings'),
-              ]),
+            currentIndex: _currentIndex,
+            onTap: _onTabTapped,
+            fixedColor: Colors.black,
+            showUnselectedLabels: true,
+            items: footerItems,
+          ),
           // This trailing comma makes auto-formatting nicer for build methods.
         ));
   }

@@ -1,6 +1,8 @@
-// In home_page.dart
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../utilities/shared_functions.dart';
 
 class Meeting {
   final String title;
@@ -12,6 +14,8 @@ class Meeting {
 }
 
 class Page1 extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   final List<Meeting> meetings = [
     Meeting('PSRP 祷言背讲', '8:30 PM', "Tuesday 周二",
@@ -24,7 +28,7 @@ class Page1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Online Meetings 线上聚会'),
+        title: const Text('Online Meetings 线上聚会'),
       ),
       body: ListView.builder(
         itemCount: meetings.length,
@@ -72,6 +76,7 @@ class Page1 extends StatelessWidget {
                             final String meetingUrl = meetings[index].data;
                             final Uri meetingLinkToParse =
                                 Uri.parse(meetingUrl);
+                            addAttendanceData(meetings[index].title);
 
                             if (await canLaunchUrl(meetingLinkToParse)) {
                               // Launch the URL

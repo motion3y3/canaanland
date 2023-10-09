@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sweat_kick/view/homePage.dart';
+import 'package:sweat_kick/view/physicalMeetings.dart';
 import 'package:sweat_kick/view/login.dart';
-import 'package:sweat_kick/view/page1.dart';
-import 'package:sweat_kick/view/page2.dart';
+import 'package:sweat_kick/view/onlineMeetings.dart';
+import 'package:sweat_kick/view/admin.dart';
 import 'package:sweat_kick/view/settings.dart';
 
 void main() async {
