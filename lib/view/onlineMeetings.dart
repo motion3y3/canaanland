@@ -76,7 +76,7 @@ class Page1 extends StatelessWidget {
                             final String meetingUrl = meetings[index].data;
                             final Uri meetingLinkToParse =
                                 Uri.parse(meetingUrl);
-                            addAttendanceData(meetings[index].title);
+                            addAttendanceData(meetings[index].title, false);
 
                             if (await canLaunchUrl(meetingLinkToParse)) {
                               // Launch the URL

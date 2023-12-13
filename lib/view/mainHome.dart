@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sweat_kick/view/physicalMeetings.dart';
 import 'package:sweat_kick/view/onlineMeetings.dart';
 import 'package:sweat_kick/view/admin.dart';
+import 'package:sweat_kick/view/readings/lifestudy.dart';
 import 'package:sweat_kick/view/settings.dart';
 
 void main() {
@@ -43,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const HomePage(),
     Page1(),
     Page3(),
-    UserListScreen(),
+    LifeStudyPage(),
   ];
   List<BottomNavigationBarItem> footerItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const HomePage(),
               Page1(),
               Page3(),
-              UserListScreen(),
+              LifeStudyPage(),
             ];
 
             footerItems = [
@@ -104,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
               const BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle_outlined), label: 'Settings'),
               const BottomNavigationBarItem(
-                  icon: Icon(Icons.pageview), label: 'Admin'),
+                  icon: Icon(Icons.pageview), label: 'Life Study'),
             ];
           });
         }

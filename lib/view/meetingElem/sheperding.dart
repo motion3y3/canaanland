@@ -2,17 +2,36 @@ import 'package:flutter/material.dart';
 
 import '../../utilities/shared_functions.dart';
 
-class SheperdingCard extends StatelessWidget {
+class SheperdingCard extends StatefulWidget {
   final String title;
   final String? time;
   final String? day;
 
   const SheperdingCard({
-    super.key,
+    Key? key,
     required this.title,
     this.time,
     this.day,
-  });
+  }) : super(key: key);
+
+  @override
+  _SheperdingCardState createState() => _SheperdingCardState();
+}
+
+class _SheperdingCardState extends State<SheperdingCard> {
+  bool isRecorded = false;
+  @override
+  void initState() {
+    super.initState();
+    _fetchAttendanceData();
+  }
+
+  Future<void> _fetchAttendanceData() async {
+    bool result = await getAttendanceData(widget.title);
+    setState(() {
+      isRecorded = result;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class SheperdingCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              title,
+              widget.title,
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -35,14 +54,14 @@ class SheperdingCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Time 时间: $time',
+              'Time 时间: ${widget.time}',
               style: const TextStyle(
                 fontSize: 16,
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              'Day 周期: $day',
+              'Day 周期: ${widget.day}',
               style: const TextStyle(
                 fontSize: 16,
               ),
@@ -53,29 +72,38 @@ class SheperdingCard extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    bool done = addAttendanceData(title) as bool;
+                    bool done =
+                        await addAttendanceData(widget.title, isRecorded);
+                    if (done) {
+                      setState(() {
+                        isRecorded = !isRecorded;
+                      });
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.transparent,
+                      isRecorded ? Colors.green : Colors.red,
                     ),
                     side: MaterialStateProperty.all<BorderSide>(
-                      const BorderSide(
-                        color: Colors.redAccent, // Border color
+                      BorderSide(
+                        color: isRecorded
+                            ? Colors.green
+                            : Colors.redAccent, // Border color
                         width: 2.0, // Border width
                       ),
                     ),
                   ),
-                  child: const Row(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check, color: Colors.white), // Your tick icon
-                      SizedBox(
+                      Icon(isRecorded ? Icons.check : Icons.close,
+                          color: Colors.white), // Your tick icon
+                      const SizedBox(
                         width: 8.0,
                       ),
                       Text(
-                        'Record 签到',
-                        style: TextStyle(color: Colors.white),
+                        isRecorded ? 'Recorded 已签到' : 'Record 签到',
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ],
                   ),
