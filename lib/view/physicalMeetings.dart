@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Meeting> meetings = [
-    Meeting("Lord's Table Meeting 主日聚会", '10:00 AM', "Lord's Day 主日"),
+    Meeting("Lord's Table 主日聚会", '10:00 AM', "Lord's Day 主日"),
     Meeting('Prophesying 申言', null, "Lord's Day 主日"),
     Meeting('Shepherding 牧养', null, null),
     Meeting('Group Meeting 小排', '7.00 PM', "Saturday 周六")
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   getMeetingCard(Meeting meetingType) {
     switch (meetingType.title) {
-      case "Lord's Table Meeting 主日聚会":
+      case "Lord's Table 主日聚会":
         return LordsDayMeetingCard(
             title: meetingType.title,
             time: meetingType.time,

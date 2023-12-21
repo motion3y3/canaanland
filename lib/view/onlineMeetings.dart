@@ -41,70 +41,71 @@ class Page1 extends StatelessWidget {
               ),
               elevation: 5,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      meetings[index].title,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          meetings[index].title,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Time 时间: ${meetings[index].time}',
-                      style: const TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Time 时间: ${meetings[index].time}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              // Handle join button tap here
+                              final String meetingUrl = meetings[index].data;
+                              final Uri meetingLinkToParse =
+                                  Uri.parse(meetingUrl);
+                              addAttendanceData(meetings[index].title, false);
+
+                              if (await canLaunchUrl(meetingLinkToParse)) {
+                                // Launch the URL
+                                await launchUrl(meetingLinkToParse);
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text("Error"),
+                                      content: Text(
+                                          "Could not launch the meeting URL."),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text("OK"),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                            child: const Text('Join'),
+                          ),
+                        ]),
                     Text(
                       'Day 周期: ${meetings[index].day}',
                       style: const TextStyle(
                         fontSize: 16,
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () async {
-                            // Handle join button tap here
-                            final String meetingUrl = meetings[index].data;
-                            final Uri meetingLinkToParse =
-                                Uri.parse(meetingUrl);
-                            addAttendanceData(meetings[index].title, false);
-
-                            if (await canLaunchUrl(meetingLinkToParse)) {
-                              // Launch the URL
-                              await launchUrl(meetingLinkToParse);
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text("Error"),
-                                    content: Text(
-                                        "Could not launch the meeting URL."),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("OK"),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          },
-                          child: Text('Join'),
-                        ),
-                      ],
                     ),
                   ],
                 ),

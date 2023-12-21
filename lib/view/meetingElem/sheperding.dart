@@ -41,7 +41,7 @@ class _SheperdingCardState extends State<SheperdingCard> {
       ),
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,63 +52,56 @@ class _SheperdingCardState extends State<SheperdingCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Time 时间: ${widget.time}',
-              style: const TextStyle(
-                fontSize: 16,
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Text(
+                'Time 时间: ${widget.time}',
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  bool done = await addAttendanceData(widget.title, isRecorded);
+                  if (done) {
+                    setState(() {
+                      isRecorded = !isRecorded;
+                    });
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    isRecorded ? Colors.green : Colors.red,
+                  ),
+                  side: MaterialStateProperty.all<BorderSide>(
+                    BorderSide(
+                      color: isRecorded
+                          ? Colors.green
+                          : Colors.redAccent, // Border color
+                      width: 2.0, // Border width
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(isRecorded ? Icons.check : Icons.close,
+                        color: Colors.white),
+                    const SizedBox(
+                      width: 8.0,
+                    ),
+                    Text(
+                      isRecorded ? 'Recorded' : 'Record',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ]),
             Text(
               'Day 周期: ${widget.day}',
               style: const TextStyle(
                 fontSize: 16,
               ),
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    bool done =
-                        await addAttendanceData(widget.title, isRecorded);
-                    if (done) {
-                      setState(() {
-                        isRecorded = !isRecorded;
-                      });
-                    }
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      isRecorded ? Colors.green : Colors.red,
-                    ),
-                    side: MaterialStateProperty.all<BorderSide>(
-                      BorderSide(
-                        color: isRecorded
-                            ? Colors.green
-                            : Colors.redAccent, // Border color
-                        width: 2.0, // Border width
-                      ),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(isRecorded ? Icons.check : Icons.close,
-                          color: Colors.white), // Your tick icon
-                      const SizedBox(
-                        width: 8.0,
-                      ),
-                      Text(
-                        isRecorded ? 'Recorded 已签到' : 'Record 签到',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
             ),
           ],
         ),
