@@ -130,7 +130,7 @@ class _LifeStudyPageState extends State<LifeStudyPage> {
                   onChanged: (newValue) {
                     setState(() {
                       selectedVersion = newValue!;
-                      if (newValue!.value == "ot") {
+                      if (newValue.value == "ot") {
                         selectedBookOptions = oldTestamentBooks;
                       } else {
                         selectedBookOptions = newTestamentBooks;
@@ -230,6 +230,8 @@ class _LifeStudyPageState extends State<LifeStudyPage> {
               'https://simplified.lsmchinese.org/lifestudy/${selectedVersion?.value}/$bookChapterString.html'),
         ),
       );
+
+      print(bookChapterString);
 
       String jsCode = """
         var lsTextElement = document.querySelector('.ls-text');

@@ -6,7 +6,7 @@ import 'package:sweat_kick/view/register.dart';
 
 import '../utilities/constants.dart';
 import '../widgets/background-image.dart';
-import 'mainHome.dart';
+import 'mainLayout.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
