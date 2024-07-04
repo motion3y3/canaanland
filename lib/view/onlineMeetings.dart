@@ -21,7 +21,6 @@ class OnlineMeetingPage extends StatefulWidget{
   MyPage1 createState() => MyPage1();
 }
 class MyPage1 extends State<OnlineMeetingPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   List<bool> _selectedDays = List<bool>.filled(7, false);
   TimeOfDay? _selectedTime;
 

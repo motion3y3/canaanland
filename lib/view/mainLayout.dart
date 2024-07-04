@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sweat_kick/view/physicalMeetings.dart';
 import 'package:sweat_kick/view/onlineMeetings.dart';
 import 'package:sweat_kick/view/reading.dart';
-import 'package:sweat_kick/view/readings/lifestudy.dart';
 import 'package:sweat_kick/view/settings.dart';
 
 import 'admin.dart';

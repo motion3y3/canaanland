@@ -9,7 +9,6 @@ class ReadingMaterialScreen extends StatefulWidget {
 }
 
 class _ReadingMaterialScreenState extends State<ReadingMaterialScreen> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final List<String> items = [
     "Life Study",
