@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 40.0,
                   child: Text(
-                    '迦南美地',
+                    'Login Page',
                     style: TextStyle(
                       color: kWhite,
                       fontSize: 25,
@@ -73,18 +73,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(
-                  height: 40.0,
-                  child: Text(
-                    'The Good Land',
-                    style: TextStyle(
-                      color: kWhite,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                // const SizedBox(
+                //   height: 40.0,
+                //   child: Text(
+                //     'The Good Land',
+                //     style: TextStyle(
+                //       color: kWhite,
+                //       fontSize: 25,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //     textAlign: TextAlign.center,
+                //   ),
+                // ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
