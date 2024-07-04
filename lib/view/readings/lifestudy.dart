@@ -119,6 +119,9 @@ class _LifeStudyPageState extends State<LifeStudyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Life Study'),
+      ),
       body: Center(
         child: Column(
           children: [
