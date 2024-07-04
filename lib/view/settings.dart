@@ -4,11 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
 
 class SettingsPage extends StatelessWidget {
-  User? currentUser = FirebaseAuth.instance.currentUser;
+  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    print(currentUser?.email);
     return Center(
       child: AppBar(
         title: Text('Logout'),
