@@ -1,13 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:sweat_kick/view/physicalMeetings.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sweat_kick/view/login.dart';
-import 'package:sweat_kick/view/onlineMeetings.dart';
-import 'package:sweat_kick/view/admin.dart';
-import 'package:sweat_kick/view/settings.dart';
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize the plugin. app_icon needs to be a valid resource on both iOS and Android.
+  var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+  var initializationSettingsIOS = DarwinInitializationSettings();
+  var initializationSettings = InitializationSettings(
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   await Firebase.initializeApp(); // Initialize Firebase
   runApp(const ChurchApp());
 }

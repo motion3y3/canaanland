@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sweat_kick/view/physicalMeetings.dart';
 import 'package:sweat_kick/view/onlineMeetings.dart';
-import 'package:sweat_kick/view/admin.dart';
+import 'package:sweat_kick/view/reading.dart';
 import 'package:sweat_kick/view/readings/lifestudy.dart';
 import 'package:sweat_kick/view/settings.dart';
+
+import 'admin.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,9 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isAdmin = false;
   final List<Widget> _pages = [
     const HomePage(),
-    Page1(),
-    Page3(),
-    const LifeStudyPage(),
+    OnlineMeetingPage(),
+    ReadingMaterialScreen(),
+    UserListScreen(),
+    SettingsPage(),
   ];
   List<BottomNavigationBarItem> footerItems = [
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -53,9 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
       label: 'Online Meeing',
     ),
     const BottomNavigationBarItem(
-        icon: Icon(Icons.account_circle_outlined), label: 'Settings'),
+        icon: Icon(Icons.menu_book), label: '操练'),
     const BottomNavigationBarItem(
-        icon: Icon(Icons.menu_book), label: 'Reading'),
+        icon: Icon(Icons.account_circle_outlined), label: 'Admin'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle_outlined), label: 'Settings'),
   ];
   int _currentIndex = 0;
 
