@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login.dart';
 
-class Page3 extends StatelessWidget {
+class SettingsPage extends StatelessWidget {
   User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
@@ -11,7 +11,7 @@ class Page3 extends StatelessWidget {
     print(currentUser?.email);
     return Center(
       child: AppBar(
-        title: Text('Your Page Title'),
+        title: Text('Logout'),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
