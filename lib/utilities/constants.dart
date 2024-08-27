@@ -6,7 +6,7 @@ const String JSON_TYPE = 'application/json';
 const String ANY_TYPE = '*/*';
 
 final kElevatedButtonStyle = ElevatedButton.styleFrom(
-  primary: Colors.deepPurple[900],
+  backgroundColor: Colors.deepPurple[900],
   shape: const RoundedRectangleBorder(
     side: BorderSide(color: Colors.teal, width: 1.0),
     borderRadius: BorderRadius.all(
