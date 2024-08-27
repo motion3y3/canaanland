@@ -40,12 +40,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Attendance Table 操练表',
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          ),
         ));
   }
 }
