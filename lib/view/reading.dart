@@ -1,7 +1,7 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sweat_kick/view/readings/lifestudy.dart';
-import 'package:sweat_kick/view/readings/truthpursue.dart';
+import 'package:sweat_kick/view/readings/truth-pursue/truthPursueList.dart';
 
 class ReadingMaterialScreen extends StatefulWidget {
   @override
@@ -9,11 +9,12 @@ class ReadingMaterialScreen extends StatefulWidget {
 }
 
 class _ReadingMaterialScreenState extends State<ReadingMaterialScreen> {
-
   final List<String> items = [
     "Life Study",
   ];
 
+  List<PlatformFile> selectedFiles = [];
+  bool isUploading = false;
 
   @override
   void initState() {
@@ -23,13 +24,13 @@ class _ReadingMaterialScreenState extends State<ReadingMaterialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Reading Materials 书报追求'),
-        ),
+      appBar: AppBar(
+        title: Text('Reading Materials 书报追求'),
+      ),
       body: ListView(
         children: [
           ListTile(
-            title: Text('Life Study'),
+            title: Text('Life Study 生命读经'),
             onTap: () {
               Navigator.push(
                 context,
@@ -40,17 +41,16 @@ class _ReadingMaterialScreenState extends State<ReadingMaterialScreen> {
             },
           ),
           ListTile(
-            title: Text('Truth Pursue'),
+            title: Text('Truth Pursue 真理追求'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => TruthPursuePage(),
+                  builder: (context) => TruthPursueListPage(),
                 ),
               );
             },
           ),
-          // Add more ListTile options for other pages as needed
         ],
       ),
     );

@@ -29,6 +29,48 @@ class _UserListScreenState extends State<UserListScreen> {
       });
     }
   }
+  void _showPopup() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        TextEditingController _textController = TextEditingController();
+
+        return AlertDialog(
+          title: Text('Enter Details'),
+          content: Container(
+            height: 300,
+            child: TextField(
+              controller: _textController,
+              maxLines: null,
+              minLines: null/**/,
+              expands: true,
+              decoration: InputDecoration(
+                hintText: 'Enter something',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Handle save action
+                print('Saved: ${_textController.text}');
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle cancel action
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +78,29 @@ class _UserListScreenState extends State<UserListScreen> {
       appBar: AppBar(
         title: Text('User List'),
       ),
-      body: ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index) {
-          final user = users[index];
-          return ListTile(
-            title: Text('User ID: ${user.uid}'),
-            subtitle: Text('Email: ${user.email}'),
-            // Add more user data as needed
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return ListTile(
+                  title: Text('User ID: ${user.uid}'),
+                  subtitle: Text('Email: ${user.email}'),
+                  // Add more user data as needed
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: _showPopup,
+              child: Text('Open Popup'),
+            ),
+          ),
+        ],
       ),
     );
   }
